@@ -20,7 +20,7 @@ const OrderProgress = () => {
 
     try {
       const res = await fetch(
-        `http://118.43.32.5:8999/api/select/suju/all?v_db=${v_db}&from_dt=${fromDtParam}&to_dt=${toDtParam}`
+        `https://118.43.32.5:8999/api/select/suju/all?v_db=${v_db}&from_dt=${fromDtParam}&to_dt=${toDtParam}`
       );
       if (!res.ok) {
         throw new Error("API response not OK");
