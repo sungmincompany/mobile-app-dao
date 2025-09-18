@@ -37,13 +37,13 @@ const StockOutResult = () => {
    ****************************************************************/
   useEffect(() => {
     // 거래처(매출처) 목록
-    fetch(`http://118.43.32.5:8999/api/select/vender/out?v_db=${v_db}`)
+    fetch(`/api/select/vender/out?v_db=${v_db}`)
       .then((res) => res.json())
       .then((data) => setVenderList(data))
       .catch((err) => console.error('거래처 목록 에러:', err));
 
     // 제품(완제품) 목록
-    fetch(`http://118.43.32.5:8999/api/select/jepum/jepum?v_db=${v_db}`)
+    fetch(`/api/select/jepum/jepum?v_db=${v_db}`)
       .then((res) => res.json())
       .then((data) => setProductList(data))
       .catch((err) => console.error('제품 목록 에러:', err));
@@ -60,7 +60,7 @@ const StockOutResult = () => {
       const toParam   = endDate   ? endDate.format('YYYYMMDD')   : '20991231';
 
       const res = await fetch(
-        `http://118.43.32.5:8999/api/select/stock/jepum-out?v_db=${v_db}&from_dt=${fromParam}&to_dt=${toParam}`
+        `/api/select/stock/jepum-out?v_db=${v_db}&from_dt=${fromParam}&to_dt=${toParam}`
       );
       if (!res.ok) throw new Error('출고내역 조회 오류');
       const data = await res.json();
@@ -108,7 +108,7 @@ const StockOutResult = () => {
 
       if (!editingRecord) {
         // 신규 등록
-        const response = await fetch(`http://118.43.32.5:8999/api/insert/stock/out?v_db=${v_db}`, {
+        const response = await fetch(`/api/insert/stock/out?v_db=${v_db}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(bodyPayload),
@@ -133,7 +133,7 @@ const StockOutResult = () => {
           inout_no: editingRecord.inout_no,
         };
         const response = await fetch(
-          `http://118.43.32.5:8999/api/update/stock/update?v_db=${v_db}`,
+          `/api/update/stock/update?v_db=${v_db}`,
           {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -192,7 +192,7 @@ const StockOutResult = () => {
       cancelText: '아니오',
       onOk: async () => {
         try {
-          const url = `http://118.43.32.5:8999/api/delete/stock/delete?inout_no=${record.inout_no}&v_db=${v_db}`;
+          const url = `/api/delete/stock/delete?inout_no=${record.inout_no}&v_db=${v_db}`;
           const res = await fetch(url, { method: 'DELETE' });
           const resData = await res.json();
           if (resData.error) {

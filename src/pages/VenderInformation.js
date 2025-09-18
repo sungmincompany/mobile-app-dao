@@ -25,7 +25,7 @@ const VenderInformation = () => {
 
   // 컴포넌트 마운트 시 API 호출하여 데이터 가져오기
   useEffect(() => {
-    fetch(`http://118.43.32.5:8999/api/select/vender/all?v_db=${v_db}`)
+    fetch(`/api/select/vender/all?v_db=${v_db}`)
       .then((res) => res.json())
       .then((data) => {
         setVenderData(data);

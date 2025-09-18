@@ -32,7 +32,7 @@ const OrderRegister = () => {
    ****************************************************************/
   useEffect(() => {
     // 제품 목록
-    fetch(`http://118.43.32.5:8999/api/select/jepum/jepum?v_db=${v_db}`)
+    fetch(`/api/select/jepum/jepum?v_db=${v_db}`)
       .then(res => res.json())
       .then(data => setProductList(data))
       .catch(err => console.error("제품 목록 에러:", err));
@@ -40,7 +40,7 @@ const OrderRegister = () => {
 
   useEffect(() => {
     // 거래처 목록
-    fetch(`http://118.43.32.5:8999/api/select/vender/out?v_db=${v_db}`)
+    fetch(`/api/select/vender/out?v_db=${v_db}`)
       .then(res => res.json())
       .then(data => setVenderList(data))
       .catch(err => console.error("거래처 목록 에러:", err));
@@ -53,7 +53,7 @@ const OrderRegister = () => {
     const today = dayjs().format("YYYYMMDD");
     try {
       const res = await fetch(
-        `http://118.43.32.5:8999/api/select/suju/all?v_db=${v_db}&from_dt=${today}&to_dt=${today}`
+        `/api/select/suju/all?v_db=${v_db}&from_dt=${today}&to_dt=${today}`
       );
       if (!res.ok) throw new Error("API response not OK");
       const data = await res.json();
@@ -109,7 +109,7 @@ const OrderRegister = () => {
 
     if (!editingRecord) {
       // 신규 등록
-      fetch(`http://118.43.32.5:8999/api/insert/suju/register?v_db=${v_db}`, {
+      fetch(`/api/insert/suju/register?v_db=${v_db}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -144,7 +144,7 @@ const OrderRegister = () => {
     } else {
       // 수정 모드
       const updatePayload = { ...payload, suju_cd: editingRecord.suju_cd };
-      fetch(`http://118.43.32.5:8999/api/update/suju/update?v_db=${v_db}`, {
+      fetch(`/api/update/suju/update?v_db=${v_db}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatePayload),

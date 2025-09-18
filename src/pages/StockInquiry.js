@@ -15,7 +15,7 @@ const StockInquiry = () => {
 
   // 컴포넌트 마운트 시 API 호출
   useEffect(() => {
-    fetch(`http://118.43.32.5:8999/api/select/stock/jepum?v_db=${v_db}`)
+    fetch(`/api/select/stock/jepum?v_db=${v_db}`)
       .then((res) => res.json())
       .then((data) => {
         setStockData(data);
