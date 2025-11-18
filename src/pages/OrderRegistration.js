@@ -227,14 +227,14 @@ const OrderRegister = () => {
           const res = await fetch(url, { method: 'DELETE' });
           const resData = await res.json();
           if (resData.error) {
-            message.error(`출고 삭제 실패: ${resData.error}`);
+            message.error(`주문 삭제 실패: ${resData.error}`);
           } else {
-            message.success('출고 삭제 성공!');
+            message.success('주문 삭제 성공!');
             fetchStockOuts(fromDt, toDt);
           }
         } catch (err) {
-          console.error('출고 삭제 에러:', err);
-          message.error('출고 삭제 중 오류가 발생했습니다.');
+          console.error('주문 삭제 에러:', err);
+          message.error('주문 삭제 중 오류가 발생했습니다.');
         }
       },
     });
