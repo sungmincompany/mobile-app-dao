@@ -230,7 +230,7 @@ const OrderRegister = () => {
             message.error(`주문 삭제 실패: ${resData.error}`);
           } else {
             message.success('주문 삭제 성공!');
-            fetchStockOuts(fromDt, toDt);
+            fetchOrders();
           }
         } catch (err) {
           console.error('주문 삭제 에러:', err);
@@ -239,7 +239,7 @@ const OrderRegister = () => {
       },
     });
   };
-
+  
   /****************************************************************
    * 5) 수량 +/-
    ****************************************************************/
