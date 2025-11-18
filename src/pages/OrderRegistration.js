@@ -221,22 +221,21 @@ const OrderRegister = () => {
       icon: null,
       okText: "예",
       cancelText: "아니오",
-      onOk: () => {
-        const url = `/api/delete/suju/delete?suju_cd=${record.suju_cd}&v_db=${v_db}`;
-        fetch(url, { method: "DELETE" })
-          .then(res => res.json())
-          .then(resData => {
-            if (resData.error) {
-              message.error("주문 삭제 실패: " + resData.error);
-            } else {
-              message.success("주문 삭제 성공!");
-              setOrders(prev => prev.filter(o => o.suju_cd !== record.suju_cd));
-            }
-          })
-          .catch(err => {
-            console.error("주문 삭제 에러:", err);
-            message.error("주문 삭제 중 오류가 발생했습니다.");
-          });
+      onOk: async () => {
+        try {
+          const url = `/api/delete/suju/delete?suju_cd=${record.suju_cd}&v_db=${v_db}`;
+          const res = await fetch(url, { method: 'DELETE' });
+          const resData = await res.json();
+          if (resData.error) {
+            message.error(`출고 삭제 실패: ${resData.error}`);
+          } else {
+            message.success('출고 삭제 성공!');
+            fetchStockOuts(fromDt, toDt);
+          }
+        } catch (err) {
+          console.error('출고 삭제 에러:', err);
+          message.error('출고 삭제 중 오류가 발생했습니다.');
+        }
       },
     });
   };
