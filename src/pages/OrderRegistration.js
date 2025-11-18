@@ -222,7 +222,7 @@ const OrderRegister = () => {
       okText: "예",
       cancelText: "아니오",
       onOk: () => {
-        const url = `http://192.168.10.89:8999/api/delete/suju/delete?suju_cd=${record.suju_cd}&v_db=${v_db}`;
+        const url = `http://agen072.iptime.org:8999/api/delete/suju/delete?suju_cd=${record.suju_cd}&v_db=${v_db}`;
         fetch(url, { method: "DELETE" })
           .then(res => res.json())
           .then(resData => {
